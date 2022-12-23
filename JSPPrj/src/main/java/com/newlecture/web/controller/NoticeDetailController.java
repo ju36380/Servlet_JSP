@@ -40,9 +40,9 @@ public class NoticeDetailController extends HttpServlet {
 			String files = rs.getString("FILES");
 			String content = rs.getString("CONTENT");
 			
-			Notice notcie = new Notice(id, title, writerId, regdate, hit, files, content);
+			Notice notice = new Notice(id, title, writerId, regdate, hit, files, content);
 			
-			request.setAttribute("n", notcie);
+			request.setAttribute("n", notice);
 			
 			/*
 			request.setAttribute("title", title);
