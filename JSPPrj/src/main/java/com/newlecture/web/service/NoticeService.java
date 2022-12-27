@@ -45,6 +45,7 @@ public class NoticeService {
 	}
 	
 	public Notice getNotice(int id) {
+		String sql = "SELECT * FROM NOtICE WHERE ID=?";
 		
 		return null;
 	}
