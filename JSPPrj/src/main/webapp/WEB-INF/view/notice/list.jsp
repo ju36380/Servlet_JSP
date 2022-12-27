@@ -227,7 +227,7 @@
 	<ul class="-list- center">
 		<c:forEach var="i" begin="0" end="4">
 			<li>
-				<a class="-text- orange bold" href="?p=${startNum + i}&t=&q=" >${i + startNum}</a>
+				<a class="-text- orange bold" href="?p=${startNum + i}&f=${param.f }&q=${param.q}" >${i + startNum}</a>
 			</li>
 		</c:forEach>	
 	</ul>
