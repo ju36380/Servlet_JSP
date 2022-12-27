@@ -187,7 +187,7 @@
 						<tr>
 							<td>${n.id }</td>
 							<td class="title indent text-align-left">
-								<a href="detail?id=${n.id }">${n.title }</a>
+								<a href="detail?id=${n.id }">${n.title }</a><span>[3]</span>
 							</td>
 							<td>${n.writerId }</td>
 							<td>
