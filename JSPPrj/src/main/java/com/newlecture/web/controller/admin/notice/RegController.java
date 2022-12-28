@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.newlecture.web.entity.Notice;
+import com.newlecture.web.service.NoticeService;
+
 @WebServlet("/admin/board/notice/reg")
 public class RegController extends HttpServlet{
 	@Override
@@ -22,10 +25,19 @@ public class RegController extends HttpServlet{
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String isOpen = request.getParameter("open");
+		boolean pub = false;
+		if(isOpen != null) {
+			pub = true;
+		}
+		Notice notice = new Notice();
+		notice.setTitle(title);
+		notice.setContent(content);
+		notice.setPub(pub);
+		notice.setWriterId("newlec");
 		
-		PrintWriter out = response.getWriter();
-		out.printf("title : %s<br >", title);
-		out.printf("content : %s<br >", content);
-		out.printf("open : %s<br >", isOpen);
+		NoticeService service = new NoticeService();
+		int result = service.insertNotice(notice);
+		
+		response.sendRedirect("list");
 	}
 }

@@ -18,14 +18,44 @@ public class NoticeService {
 		
 		return 0;
 	}
+	
 	public int pubNoticeAll(int[] ids){
 		
 		return 0;
 	}
+	
 	public int insertNotice(Notice notice){
 		
-		return 0;
+		int result = 0;
+		
+		String sql = "INSERT INTO NOTICE(TITLE, CONTENT, WRITER_ID, PUB) VALUES(?,?,?,?)";
+	
+		String url = "jdbc:oracle:thin:@localhost:1521/xepdb1";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, notice.getTitle());
+			st.setString(2, notice.getContent());
+			st.setString(3, notice.getWriterId());
+			st.setBoolean(4, notice.getPub());
+			
+			result = st.executeUpdate();
+			
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
+	
 	public int deleteNotice(int id){
 		
 		return 0;
