@@ -64,7 +64,9 @@ public class RegController extends HttpServlet{
 			fis.close();
 		
 		}
-		builder.delete(builder.length()-1, builder.length());
+		if(builder.length() != 0) {
+			builder.delete(builder.length()-1, builder.length());			
+		}
 		
 		boolean pub = false;
 		if(isOpen != null) {
