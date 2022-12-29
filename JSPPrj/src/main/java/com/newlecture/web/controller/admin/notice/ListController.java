@@ -1,6 +1,7 @@
 package com.newlecture.web.controller.admin.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,23 +26,22 @@ public class ListController extends HttpServlet {
 		String[] delIds = request.getParameterValues("del-id");
 		String cmd = request.getParameter("cmd");
 		String ids_ = request.getParameter("ids");
-		String[] ids = ids_.split(" "); // 1,2,3,4,5,6,7 ...
+		String[] ids = ids_.trim().split(" "); // 1,2,3,4,5,6,7 ...
 		
 		switch(cmd) {
 		case "일괄공개":
-			for(String openId : openIds) {
-				List<String> oids = Arrays.asList(openIds);
-				for(int i=0; i<ids.length; i++) {
-					// 1. 현재 id가 open 상태
-					if(oids.contains(ids[i])) {
-						
-					}else {
-						
-					}
-				}
-			}
-			service.pubNoticeList(opnIds);
-			service.closeNoticeList(clsIds);
+			for(String openId : openIds) 
+				System.out.println();
+			
+			List<String> oids = Arrays.asList(openIds);
+			List<String> cids = new ArrayList(Arrays.asList(ids));
+			cids.removeAll(oids);	
+			System.out.println(Arrays.asList(ids));
+			System.out.println(oids);
+			System.out.println(cids);
+			
+			//service.pubNoticeList(opnIds);
+			//service.closeNoticeList(clsIds);
 			break;
 		case "일괄삭제":
 			
