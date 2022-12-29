@@ -19,8 +19,19 @@ public class NoticeService {
 		return 0;
 	}
 	
-	public int pubNoticeAll(int[] ids){
+	public int pubNoticeAll(int[] oids, int[] cids){
 		
+		return pubNoticeAll();
+	}
+
+	public int pubNoticeAll(List<String> oids, List<String> cids){
+	
+		return pubNoticeAll();
+	}
+	// 20,30,43,55 -> CSV 형식
+	public int pubNoticeAll(String oidsCSV, String cidsCSV){
+		
+		String sql = "UPDATE NOTICE SET PUB=1 WHERE ID IN (?)";
 		return 0;
 	}
 	

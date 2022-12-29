@@ -33,15 +33,15 @@ public class ListController extends HttpServlet {
 			for(String openId : openIds) 
 				System.out.println();
 			
-			List<String> oids = Arrays.asList(openIds);
+			List<String> oids = Arrays.asList(openIds); // 체크된거
 			List<String> cids = new ArrayList(Arrays.asList(ids));
-			cids.removeAll(oids);	
+			cids.removeAll(oids);	// 체크된거 뺀거 -> cids
 			System.out.println(Arrays.asList(ids));
 			System.out.println(oids);
 			System.out.println(cids);
 			
-			//service.pubNoticeList(opnIds);
-			//service.closeNoticeList(clsIds);
+			// Transaction 처리
+			service.pubNoticeAll(oids, cids);
 			break;
 		case "일괄삭제":
 			
