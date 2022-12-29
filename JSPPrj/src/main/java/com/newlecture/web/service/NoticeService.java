@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +21,26 @@ public class NoticeService {
 	}
 	
 	public int pubNoticeAll(int[] oids, int[] cids){
+		List<String> oidsList = new ArrayList<>();
+		for(int i=0; i<oids.length; i++) {
+			oidsList.add(String.valueOf(oids[i]));
+		}
 		
-		return pubNoticeAll();
+		List<String> cidsList = new ArrayList<>();
+		for(int i=0; i<cids.length; i++) {
+			cidsList.add(String.valueOf(cids[i]));
+		}
+		
+		
+		return pubNoticeAll(oidsList, cidsList);
 	}
 
 	public int pubNoticeAll(List<String> oids, List<String> cids){
 	
-		return pubNoticeAll();
+		String oidsCSV = String.join(",", oids);
+		String cidsCSV = String.join(",", cids);
+		
+		return pubNoticeAll(oidsCSV, cidsCSV);
 	}
 	// 20,30,43,55 -> CSV 형식
 	public int pubNoticeAll(String oidsCSV, String cidsCSV){
