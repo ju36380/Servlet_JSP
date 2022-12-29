@@ -1,6 +1,7 @@
 package com.newlecture.web.controller.admin.notice;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,24 +19,37 @@ public class ListController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		NoticeService service = new NoticeService();
 		
-		String[] openIds = request.getParameterValues("open-id");
+		String[] openIds = request.getParameterValues("open-id"); // 2,4,5
 		String[] delIds = request.getParameterValues("del-id");
 		String cmd = request.getParameter("cmd");
+		String ids_ = request.getParameter("ids");
+		String[] ids = ids_.split(" "); // 1,2,3,4,5,6,7 ...
 		
 		switch(cmd) {
 		case "일괄공개":
 			for(String openId : openIds) {
-				System.out.printf("open id : %s\n", openId);			
+				List<String> oids = Arrays.asList(openIds);
+				for(int i=0; i<ids.length; i++) {
+					// 1. 현재 id가 open 상태
+					if(oids.contains(ids[i])) {
+						
+					}else {
+						
+					}
+				}
 			}
+			service.pubNoticeList(opnIds);
+			service.closeNoticeList(clsIds);
 			break;
 		case "일괄삭제":
-			NoticeService service = new NoticeService();
-			int[] ids = new int[delIds.length];
-			for(int i=0; i<delIds.length; i++) 
-				ids[i] = Integer.parseInt(delIds[i]);
 			
-			int result = service.deleteNoticeAll(ids);
+			int[] ids1 = new int[delIds.length];
+			for(int i=0; i<delIds.length; i++) 
+				ids1[i] = Integer.parseInt(delIds[i]);
+			
+			int result = service.deleteNoticeAll(ids1);
 			break;
 		}
 		
