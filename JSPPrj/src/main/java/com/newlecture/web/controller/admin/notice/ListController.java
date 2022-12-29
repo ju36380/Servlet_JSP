@@ -30,15 +30,10 @@ public class ListController extends HttpServlet {
 		
 		switch(cmd) {
 		case "일괄공개":
-			for(String openId : openIds) 
-				System.out.println();
 			
 			List<String> oids = Arrays.asList(openIds); // 체크된거
 			List<String> cids = new ArrayList(Arrays.asList(ids));
 			cids.removeAll(oids);	// 체크된거 뺀거 -> cids
-			System.out.println(Arrays.asList(ids));
-			System.out.println(oids);
-			System.out.println(cids);
 			
 			// Transaction 처리
 			service.pubNoticeAll(oids, cids);
