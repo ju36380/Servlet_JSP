@@ -45,8 +45,33 @@ public class NoticeService {
 	// 20,30,43,55 -> CSV 형식
 	public int pubNoticeAll(String oidsCSV, String cidsCSV){
 		
-		String sql = "UPDATE NOTICE SET PUB=1 WHERE ID IN (?)";
-		return 0;
+		int result = 0;
+		String sqlOpen = String.format("UPDATE NOTICE SET PUB=1 WHERE ID IN (%s)", oidsCSV);
+		String sqlClose = String.format("UPDATE NOTICE SET PUB=0 WHERE ID IN (%s)", cidsCSV);
+		
+		String url = "jdbc:oracle:thin:@localhost:1521/xepdb1";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "newlec", "1234");
+			Statement stOpen = con.createStatement();
+			result += stOpen.executeUpdate(sqlOpen);
+			
+			Statement stClose = con.createStatement();
+			result += stClose.executeUpdate(sqlClose);
+			
+			stOpen.close();
+			stClose.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	public int insertNotice(Notice notice){
